@@ -138,7 +138,13 @@ export class KeybindingSrv {
     }
 
     if (search.kiosk) {
-      this.$rootScope.appEvent(CoreEvents.toggleKioskMode, { exit: true });
+      let options = { exit: true, shared: false };
+
+      if (search.shared) {
+        options.shared = true;
+      }
+
+      this.$rootScope.appEvent(CoreEvents.toggleKioskMode, options);
     }
   }
 

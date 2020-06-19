@@ -203,7 +203,12 @@ export function grafanaAppDirective(
       });
 
       // handle kiosk mode
-      appEvents.on(CoreEvents.toggleKioskMode, (options: { exit?: boolean }) => {
+      appEvents.on(CoreEvents.toggleKioskMode, (options: { exit?: boolean; shared?: boolean }) => {
+        // 对于分享的url，规避退出事件
+        if (options && options.shared && options.exit) {
+          return;
+        }
+
         const search: { kiosk?: KioskUrlValue } = $location.search();
 
         if (options && options.exit) {
