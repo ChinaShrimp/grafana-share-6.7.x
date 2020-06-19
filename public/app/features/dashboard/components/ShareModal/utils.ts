@@ -30,6 +30,9 @@ export function buildParams(
     params.theme = selectedTheme;
   }
 
+  params.shared = true;
+  params.kiosk = 'tv';
+
   if (panel) {
     params.panelId = panel.id;
     params.fullscreen = true;
