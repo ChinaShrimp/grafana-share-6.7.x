@@ -153,7 +153,7 @@ export const TimePickerContentWithScreenSize: React.FC<PropsWithScreenSize> = pr
       <CustomScrollbar className={styles.rightSide}>
         <NarrowScreenForm {...props} visible={!isFullscreen} historyOptions={historyOptions} />
         <TimeRangeList
-          title="Relative time ranges"
+          title="相对时间窗口"
           options={quickOptions}
           onSelect={props.onChange}
           value={props.value}
@@ -161,7 +161,7 @@ export const TimePickerContentWithScreenSize: React.FC<PropsWithScreenSize> = pr
         />
         <div className={styles.spacing} />
         <TimeRangeList
-          title="Other quick ranges"
+          title="其它选项"
           options={otherOptions}
           onSelect={props.onChange}
           value={props.value}
@@ -192,7 +192,7 @@ const NarrowScreenForm: React.FC<FormProps> = props => {
   return (
     <>
       <div className={styles.header} onClick={() => setCollapsed(!collapsed)}>
-        <TimePickerTitle>Absolute time range</TimePickerTitle>
+        <TimePickerTitle>绝对时间窗口</TimePickerTitle>
         {collapsed ? <i className="fa fa-caret-up" /> : <i className="fa fa-caret-down" />}
       </div>
       {collapsed && (
@@ -206,7 +206,7 @@ const NarrowScreenForm: React.FC<FormProps> = props => {
             />
           </div>
           <TimeRangeList
-            title="Recently used absolute ranges"
+            title="经常使用的时间段"
             options={props.historyOptions || []}
             onSelect={props.onChange}
             value={props.value}
@@ -231,13 +231,13 @@ const FullScreenForm: React.FC<FormProps> = props => {
     <>
       <div className={styles.container}>
         <div className={styles.title}>
-          <TimePickerTitle>Absolute time range</TimePickerTitle>
+          <TimePickerTitle>设置时间范围</TimePickerTitle>
         </div>
         <TimeRangeForm value={props.value} timeZone={props.timeZone} onApply={props.onChange} isFullscreen={true} />
       </div>
       <div className={styles.recent}>
         <TimeRangeList
-          title="Recently used absolute ranges"
+          title="最近使用的时间段"
           options={props.historyOptions || []}
           onSelect={props.onChange}
           value={props.value}

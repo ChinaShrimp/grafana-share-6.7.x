@@ -32,7 +32,7 @@ export const mapRangeToTimeOption = (range: TimeRange, timeZone?: TimeZone): Tim
     from,
     to,
     section: 3,
-    display: `${formattedFrom} to ${formattedTo}`,
+    display: `${formattedFrom} 至 ${formattedTo}`,
   };
 };
 

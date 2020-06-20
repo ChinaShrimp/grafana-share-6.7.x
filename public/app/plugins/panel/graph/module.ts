@@ -231,8 +231,8 @@ class GraphCtrl extends MetricsPanelCtrl {
 
     if (datapointsCount === 0) {
       this.dataWarning = {
-        title: 'No data',
-        tip: 'No data returned from query',
+        title: '没有数据',
+        tip: '没有查询到数据',
       };
     } else {
       for (const series of this.seriesList) {

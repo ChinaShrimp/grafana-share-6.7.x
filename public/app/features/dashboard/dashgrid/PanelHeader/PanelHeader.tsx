@@ -41,11 +41,21 @@ interface State {
 
 export class PanelHeader extends Component<Props, State> {
   clickCoordinates: ClickCoordinates = { x: 0, y: 0 };
+  // 分享模式
+  sharedMode: boolean;
 
   state: State = {
     panelMenuOpen: false,
     menuItems: [],
   };
+
+  constructor(props: Props) {
+    super(props);
+
+    // 通过kiosk和shared两个参数确定当前是否为分享模式
+    const url = window.location.href;
+    this.sharedMode = url.includes('kiosk') && url.includes('shared');
+  }
 
   eventToClickCoordinates = (event: React.MouseEvent<HTMLDivElement>) => {
     return {
@@ -123,9 +133,9 @@ export class PanelHeader extends Component<Props, State> {
             <div className="panel-title">
               <span className="icon-gf panel-alert-icon" />
               <span className="panel-title-text">
-                {title} <span className="fa fa-caret-down panel-menu-toggle" />
+                {title} {!this.sharedMode && <span className="fa fa-caret-down panel-menu-toggle" />}
               </span>
-              {this.state.panelMenuOpen && (
+              {this.state.panelMenuOpen && !this.sharedMode && (
                 <ClickOutsideWrapper onClick={this.closeMenu}>
                   <PanelHeaderMenu items={menuItems} />
                 </ClickOutsideWrapper>

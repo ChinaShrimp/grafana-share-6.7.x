@@ -8,7 +8,7 @@ import memoizeOne from 'memoize-one';
 import { GrafanaTheme } from '@grafana/data';
 import { withTheme } from '../../themes';
 
-export const defaultIntervals = ['5s', '10s', '30s', '1m', '5m', '15m', '30m', '1h', '2h', '1d'];
+export const defaultIntervals = ['5秒', '10秒', '30秒', '1分钟', '5分钟', '15分钟', '30分钟', '1小时', '2小时', '1天'];
 
 const getStyles = memoizeOne((theme: GrafanaTheme) => {
   return {
@@ -35,7 +35,7 @@ export interface Props {
 }
 
 export class RefreshPickerBase extends PureComponent<Props> {
-  static offOption = { label: 'Off', value: '' };
+  static offOption = { label: '关闭', value: '' };
   static liveOption = { label: 'Live', value: 'LIVE' };
   static isLive = (refreshInterval?: string): boolean => refreshInterval === RefreshPicker.liveOption.value;
 

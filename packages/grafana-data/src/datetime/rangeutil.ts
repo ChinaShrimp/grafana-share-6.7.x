@@ -7,58 +7,58 @@ import * as dateMath from './datemath';
 import { isDateTime, DateTime } from './moment_wrapper';
 
 const spans: { [key: string]: { display: string; section?: number } } = {
-  s: { display: 'second' },
-  m: { display: 'minute' },
-  h: { display: 'hour' },
-  d: { display: 'day' },
-  w: { display: 'week' },
-  M: { display: 'month' },
-  y: { display: 'year' },
+  s: { display: '秒' },
+  m: { display: '分钟' },
+  h: { display: '小时' },
+  d: { display: '天' },
+  w: { display: '周' },
+  M: { display: '月' },
+  y: { display: '年' },
 };
 
 const rangeOptions = [
-  { from: 'now/d', to: 'now/d', display: 'Today', section: 2 },
-  { from: 'now/d', to: 'now', display: 'Today so far', section: 2 },
-  { from: 'now/w', to: 'now/w', display: 'This week', section: 2 },
-  { from: 'now/w', to: 'now', display: 'This week so far', section: 2 },
-  { from: 'now/M', to: 'now/M', display: 'This month', section: 2 },
-  { from: 'now/M', to: 'now', display: 'This month so far', section: 2 },
-  { from: 'now/y', to: 'now/y', display: 'This year', section: 2 },
-  { from: 'now/y', to: 'now', display: 'This year so far', section: 2 },
+  { from: 'now/d', to: 'now/d', display: '今天', section: 2 },
+  { from: 'now/d', to: 'now', display: '今天到目前为止', section: 2 },
+  { from: 'now/w', to: 'now/w', display: '本周', section: 2 },
+  { from: 'now/w', to: 'now', display: '本周到目前为止', section: 2 },
+  { from: 'now/M', to: 'now/M', display: '本月', section: 2 },
+  { from: 'now/M', to: 'now', display: '本月到目前为止', section: 2 },
+  { from: 'now/y', to: 'now/y', display: '今年', section: 2 },
+  { from: 'now/y', to: 'now', display: '今年到目前为止', section: 2 },
 
-  { from: 'now-1d/d', to: 'now-1d/d', display: 'Yesterday', section: 1 },
+  { from: 'now-1d/d', to: 'now-1d/d', display: '昨天', section: 1 },
   {
     from: 'now-2d/d',
     to: 'now-2d/d',
-    display: 'Day before yesterday',
+    display: '前天',
     section: 1,
   },
   {
     from: 'now-7d/d',
     to: 'now-7d/d',
-    display: 'This day last week',
+    display: '7天前',
     section: 1,
   },
-  { from: 'now-1w/w', to: 'now-1w/w', display: 'Previous week', section: 1 },
-  { from: 'now-1M/M', to: 'now-1M/M', display: 'Previous month', section: 1 },
-  { from: 'now-1y/y', to: 'now-1y/y', display: 'Previous year', section: 1 },
+  { from: 'now-1w/w', to: 'now-1w/w', display: '上一周', section: 1 },
+  { from: 'now-1M/M', to: 'now-1M/M', display: '上个月', section: 1 },
+  { from: 'now-1y/y', to: 'now-1y/y', display: '去年', section: 1 },
 
-  { from: 'now-5m', to: 'now', display: 'Last 5 minutes', section: 3 },
-  { from: 'now-15m', to: 'now', display: 'Last 15 minutes', section: 3 },
-  { from: 'now-30m', to: 'now', display: 'Last 30 minutes', section: 3 },
-  { from: 'now-1h', to: 'now', display: 'Last 1 hour', section: 3 },
-  { from: 'now-3h', to: 'now', display: 'Last 3 hours', section: 3 },
-  { from: 'now-6h', to: 'now', display: 'Last 6 hours', section: 3 },
-  { from: 'now-12h', to: 'now', display: 'Last 12 hours', section: 3 },
-  { from: 'now-24h', to: 'now', display: 'Last 24 hours', section: 3 },
-  { from: 'now-2d', to: 'now', display: 'Last 2 days', section: 0 },
-  { from: 'now-7d', to: 'now', display: 'Last 7 days', section: 0 },
-  { from: 'now-30d', to: 'now', display: 'Last 30 days', section: 0 },
-  { from: 'now-90d', to: 'now', display: 'Last 90 days', section: 0 },
-  { from: 'now-6M', to: 'now', display: 'Last 6 months', section: 0 },
-  { from: 'now-1y', to: 'now', display: 'Last 1 year', section: 0 },
-  { from: 'now-2y', to: 'now', display: 'Last 2 years', section: 0 },
-  { from: 'now-5y', to: 'now', display: 'Last 5 years', section: 0 },
+  { from: 'now-5m', to: 'now', display: '过去 5 分钟', section: 3 },
+  { from: 'now-15m', to: 'now', display: '过去 15 分钟', section: 3 },
+  { from: 'now-30m', to: 'now', display: '过去 30 分钟', section: 3 },
+  { from: 'now-1h', to: 'now', display: '过去 1 小时', section: 3 },
+  { from: 'now-3h', to: 'now', display: '过去 3 小时', section: 3 },
+  { from: 'now-6h', to: 'now', display: '过去 6 小时', section: 3 },
+  { from: 'now-12h', to: 'now', display: '过去 12 小时', section: 3 },
+  { from: 'now-24h', to: 'now', display: '过去 24 小时', section: 3 },
+  { from: 'now-2d', to: 'now', display: '过去 2 天', section: 0 },
+  { from: 'now-7d', to: 'now', display: '过去 7 天', section: 0 },
+  { from: 'now-30d', to: 'now', display: '过去 30 天', section: 0 },
+  { from: 'now-90d', to: 'now', display: '过去 90 天', section: 0 },
+  { from: 'now-6M', to: 'now', display: '过去 6 月', section: 0 },
+  { from: 'now-1y', to: 'now', display: '过去 1 年', section: 0 },
+  { from: 'now-2y', to: 'now', display: '过去 2 年', section: 0 },
+  { from: 'now-5y', to: 'now', display: '过去 5 年', section: 0 },
 ];
 
 const absoluteFormat = 'YYYY-MM-DD HH:mm:ss';
@@ -145,23 +145,23 @@ export function describeTextRange(expr: any) {
  * @alpha
  */
 export function describeTimeRange(range: RawTimeRange): string {
-  const option = rangeIndex[range.from.toString() + ' to ' + range.to.toString()];
+  const option = rangeIndex[range.from.toString() + ' 至 ' + range.to.toString()];
   if (option) {
     return option.display;
   }
 
   if (isDateTime(range.from) && isDateTime(range.to)) {
-    return formatDate(range.from) + ' to ' + formatDate(range.to);
+    return formatDate(range.from) + ' 至 ' + formatDate(range.to);
   }
 
   if (isDateTime(range.from)) {
     const toMoment = dateMath.parse(range.to, true);
-    return toMoment ? formatDate(range.from) + ' to ' + toMoment.fromNow() : '';
+    return toMoment ? formatDate(range.from) + ' 至 ' + toMoment.fromNow() : '';
   }
 
   if (isDateTime(range.to)) {
     const from = dateMath.parse(range.from, false);
-    return from ? from.fromNow() + ' to ' + formatDate(range.to) : '';
+    return from ? from.fromNow() + ' 至 ' + formatDate(range.to) : '';
   }
 
   if (range.to.toString() === 'now') {
@@ -169,7 +169,7 @@ export function describeTimeRange(range: RawTimeRange): string {
     return res.display;
   }
 
-  return range.from.toString() + ' to ' + range.to.toString();
+  return range.from.toString() + ' 至 ' + range.to.toString();
 }
 
 export const isValidTimeSpan = (value: string) => {
