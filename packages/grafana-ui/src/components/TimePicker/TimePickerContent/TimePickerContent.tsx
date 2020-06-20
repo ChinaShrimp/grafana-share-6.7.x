@@ -253,10 +253,7 @@ const EmptyRecentList = memo(() => {
   const theme = useTheme();
   const styles = getEmptyListStyles(theme);
 
-  return (
-    <div className={styles.container}>
-    </div>
-  );
+  return <div className={styles.container}></div>;
 });
 
 function mapToHistoryOptions(ranges?: TimeRange[], timeZone?: TimeZone): TimeOption[] {
