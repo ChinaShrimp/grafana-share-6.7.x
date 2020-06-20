@@ -37,14 +37,28 @@ type Props = StateProps & OwnProps;
 
 export class DashNav extends PureComponent<Props> {
   playlistSrv: PlaylistSrv;
+  // 分享模式
+  sharedMode: boolean;
 
   constructor(props: Props) {
     super(props);
+
+    const { kiosk, shared } = props.location.query;
+
+    if (kiosk && shared) {
+      this.sharedMode = true;
+    } else {
+      this.sharedMode = false;
+    }
+
     this.playlistSrv = this.props.$injector.get('playlistSrv');
   }
 
   onDahboardNameClick = () => {
-    appEvents.emit(CoreEvents.showDashSearch);
+    // 分享模式下
+    if (!this.sharedMode) {
+      appEvents.emit(CoreEvents.showDashSearch);
+    }
   };
 
   onFolderNameClick = () => {
@@ -256,12 +270,14 @@ export class DashNav extends PureComponent<Props> {
         </div>
 
         <div className="navbar-buttons navbar-buttons--tv">
-          <DashNavButton
-            tooltip="Cycle view mode"
-            classSuffix="tv"
-            icon="fa fa-desktop"
-            onClick={this.onToggleTVMode}
-          />
+          {!this.sharedMode && (
+            <DashNavButton
+              tooltip="Cycle view mode"
+              classSuffix="tv"
+              icon="fa fa-desktop"
+              onClick={this.onToggleTVMode}
+            />
+          )}
         </div>
 
         {!dashboard.timepicker.hidden && (
